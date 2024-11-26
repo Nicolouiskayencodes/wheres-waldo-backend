@@ -9,12 +9,16 @@ async function getImage(id) {
     where: {
       id: id,
     },
-    include: {
+    select: {
       characters: true,
       scores: {
+        where: {
+          completionTime: {not: null},
+        },
         orderBy: {
-          total: 'asc'
-      }},
+           completionTime: 'asc'
+        }
+      }
     },
   })
   return image;
@@ -32,24 +36,64 @@ async function checkCharacter(id, name) {
   })
   return character.characters[1]
 }
-async function addScore(id, time) {
+async function addScore(id) {
   const score = await prisma.score.create({
     data: {
-      total: time,
       imageid: id
-    }
+    },
+    include: {
+      image: {
+        select: {
+          id: true,
+          characters: true,
+        }
+      }
+    },
   })
   return score
 }
-async function addName(id, name) {
+async function findCharacter(scoreId, character) {
   const score = await prisma.score.update({
     where: {
-      id: id,
+      id: scoreId,
+    },
+    data: {
+      found: {
+        push: character
+      }
+    },
+    include: {
+      image: {
+        select: {
+          id: true,
+          characters: true,
+        }
+      }
+    },
+  })
+  return score
+}
+async function complete(scoreId, completionTime) {
+  const score = await prisma.score.update({
+    where: {
+      id: scoreId,
+    },
+    data: {
+      completionTime: completionTime
+    },
+  })
+  return score
+}
+async function addName(scoreId, name) {
+  const score = await prisma.score.update({
+    where: {
+      id: scoreId,
     },
     data: {
       name: name
-    }
+    },
   })
+  return score
 }
 
-module.exports = { getAllImages, getImage, checkCharacter, addScore, addName }
+module.exports = { getAllImages, getImage, checkCharacter, addScore, addName, findCharacter, complete }

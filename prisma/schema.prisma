@@ -31,7 +31,9 @@ model Character {
 
 model Score {
   id    Int   @id @default(autoincrement())
-  total Decimal
+  createdAt DateTime @default(now())
+  completionTime Int?
+  found String[]
   name String?
   image Image @relation(fields: [imageid], references: [id])
   imageid Int

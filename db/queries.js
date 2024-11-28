@@ -9,7 +9,7 @@ async function getImage(id) {
     where: {
       id: id,
     },
-    select: {
+    include: {
       characters: true,
       scores: {
         where: {
@@ -34,7 +34,7 @@ async function checkCharacter(id, name) {
       }
     }},
   })
-  return character.characters[1]
+  return character.characters[0]
 }
 async function addScore(id) {
   const score = await prisma.score.create({
@@ -42,12 +42,7 @@ async function addScore(id) {
       imageid: id
     },
     include: {
-      image: {
-        select: {
-          id: true,
-          characters: true,
-        }
-      }
+      image: true
     },
   })
   return score

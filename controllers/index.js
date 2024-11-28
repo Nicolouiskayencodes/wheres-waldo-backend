@@ -34,9 +34,9 @@ const checkCharacter = async (req, res) =>{
       if (score.found.length === image.characters.length) {
         const completionTime = Math.abs(new Date() - score.createdAt)
         const complete = await db.complete(scoreId, completionTime);
-        res.json(complete);
+        res.status(200).json({image, score: complete});
       } else {
-        res.json(score);
+        res.status(200).json({image, score});
       }
     } else {
       res.json(false);
@@ -50,6 +50,8 @@ const addName = async (req, res) => {
   const name = req.body.name;
   try {
     const score = await db.addName(id, name)
+    const image = await db.getImage(score.imageid);
+    res.status(200).json({image, score});
   } catch (err) {
     throw (err)
   }

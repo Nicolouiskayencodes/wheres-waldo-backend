@@ -4,6 +4,8 @@ async function main() {
   await prisma.image.create({
     data: {
       link: 'https://res.cloudinary.com/dwhhkaaoe/image/upload/v1732583885/avengers_bs6lvb.jpg',
+      height: 853,
+      width: 1280,
       characters:{
         create: [{
           name: 'thanos',

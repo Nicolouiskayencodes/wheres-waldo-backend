@@ -16,6 +16,8 @@ datasource db {
 model Image {
   id    Int   @id @default(autoincrement())
   link  String
+  width Int
+  height Int
   characters Character[]
   scores Score[]
 }

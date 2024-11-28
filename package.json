@@ -11,13 +11,13 @@
   "author": "nicolouiskayencodes <nicolouiskayencodes@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "prisma": "^5.22.0"
+    "prisma": "^6.0.0"
   }
 }

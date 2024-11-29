@@ -26,8 +26,8 @@ const checkCharacter = async (req, res) =>{
   const yguess = req.body.yguess;
   try {
     const character = await db.checkCharacter(imageId, characterName);
-    const x = (parseInt(character.xcoordinate) - parseInt(xguess));
-    const y = (parseInt(character.ycoordinate) - parseInt(yguess));
+    const x = Math.abs(parseInt(character.xcoordinate) - parseInt(xguess));
+    const y = Math.abs(parseInt(character.ycoordinate) - parseInt(yguess));
     if (x<60 && y<60){
       const score = await db.findCharacter(scoreId, characterName);
       const image = await db.getImage(imageId);

@@ -83,9 +83,9 @@ async function main() {
           ycoordinate: 85,
         },
         {
-          name: 'electabuzz',
-          xcoordinate: 240,
-          ycoordinate: 1165,
+          name: 'braviary',
+          xcoordinate: 390,
+          ycoordinate: 305,
         },
         {
           name: 'bellsprout',
